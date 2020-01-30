@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
     tools:context=".view.activity.MainActivity">
 
     <TextView
@@ -16,8 +18,33 @@
     <ImageView
         android:id="@+id/ivEventImage"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="200dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvEventName"/>
+
+    <TextView
+        android:id="@+id/tvTextCheckin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/checkin"
+        android:padding="10dp"
+        android:textSize="17sp"
+        android:textColor="@color/blue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/tvTextShare"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/share"
+        android:padding="10dp"
+        android:textSize="17sp"
+        android:textColor="@color/blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="16dp"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

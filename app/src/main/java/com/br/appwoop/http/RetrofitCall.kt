@@ -1,5 +1,8 @@
 package com.br.appwoop.http
 
+import android.util.Log
+import com.br.appwoop.R
+import com.br.appwoop.objects.CheckinItem
 import com.br.appwoop.view.adapter.RecyclerAdapter
 import com.br.appwoop.view.activity.EventDetailsActivity
 import com.br.appwoop.objects.EventItem
@@ -11,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitCall {
 
-    private const val baseUrl = "https://5b840ba5db24a100142dcd8c.mockapi.io/api/events/"
+    private const val baseUrl = "https://5b840ba5db24a100142dcd8c.mockapi.io/api/"
 
     private val retrofit = Retrofit.Builder()
         .baseUrl(baseUrl)
@@ -40,6 +43,22 @@ object RetrofitCall {
             override fun onResponse(call: Call<EventItem>, response: Response<EventItem>) {
                 if (response.body() != null) {
                     eventDetailsActivity.updateInterface(response.body()!!)
+                }
+            }
+        })
+    }
+
+    fun postCheckin(checkinItem: CheckinItem, eventDetailsActivity: EventDetailsActivity) {
+        service.postCheckin(checkinItem).enqueue(object: Callback<Any> {
+            override fun onFailure(call: Call<Any>, t: Throwable) {
+                eventDetailsActivity.showCheckinResult(eventDetailsActivity.getString(R.string.checkin_fail))
+            }
+
+            override fun onResponse(call: Call<Any>, response: Response<Any>) {
+                if(response.code() == 200) {
+                    eventDetailsActivity.showCheckinResult(eventDetailsActivity.getString(R.string.checkin_successful))
+                } else{
+                    eventDetailsActivity.showCheckinResult(eventDetailsActivity.getString(R.string.checkin_fail) + " - ${response.code()}")
                 }
             }
         })

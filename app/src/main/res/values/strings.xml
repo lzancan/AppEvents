@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">AppWoop</string>
+    <string name="checkin">Fazer Checkin</string>
+    <string name="share">Compartilhar</string>
+    <string name="look_event">Olha esse evento: </string>
+    <string name="name">Nome</string>
+    <string name="email">Email</string>
+    <string name="do_checkin">Fazer Checkin</string>
+    <string name="checkin_fail">Falha no Checkin</string>
+    <string name="checkin_successful">Sucesso no checkin!</string>
 </resources>
