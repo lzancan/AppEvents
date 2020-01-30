@@ -1,11 +1,11 @@
 package com.br.appwoop.view.activity
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.br.appwoop.R
 import com.br.appwoop.http.RetrofitCall
 import com.br.appwoop.objects.CheckinItem
@@ -14,7 +14,7 @@ import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_details.*
 import kotlinx.android.synthetic.main.dialog_checkin.view.*
 
-class EventDetailsActivity: Activity() {
+class EventDetailsActivity: AppCompatActivity() {
 
     companion object{
         const val EVENT_ITEM_ID = "EVENT_ITEM_ID"
@@ -24,18 +24,26 @@ class EventDetailsActivity: Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = getString(R.string.details)
+
         val eventId = intent.extras?.get(EVENT_ITEM_ID) as Int
 
         RetrofitCall.loadEvent(eventId, this@EventDetailsActivity)
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
+    }
+
     fun updateInterface(eventItem: EventItem){
         tvEventName.text = eventItem.title
-        Glide.with(applicationContext).load(eventItem.image).into(ivEventImage)
+        tvDescription.text = eventItem.description
+        Glide.with(applicationContext).load(eventItem.image).error(R.drawable.ic_error).into(ivEventImage)
 
         tvTextCheckin.setOnClickListener{
             showDialog(eventItem)
-            RetrofitCall.postCheckin(CheckinItem(1, "LZ", "luciano@gmail.com"), this@EventDetailsActivity)
         }
 
         tvTextShare.setOnClickListener{

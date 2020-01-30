@@ -55,7 +55,7 @@ object RetrofitCall {
             }
 
             override fun onResponse(call: Call<Any>, response: Response<Any>) {
-                if(response.code() == 200) {
+                if(response.body().toString().contains("code=200")) {
                     eventDetailsActivity.showCheckinResult(eventDetailsActivity.getString(R.string.checkin_successful))
                 } else{
                     eventDetailsActivity.showCheckinResult(eventDetailsActivity.getString(R.string.checkin_fail) + " - ${response.code()}")

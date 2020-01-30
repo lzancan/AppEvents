@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.br.appwoop.R
 import com.br.appwoop.view.activity.EventDetailsActivity
@@ -20,7 +21,7 @@ class RecyclerAdapter(private val context: Context, private val eventList: Array
         //get view reference
         var textTitle: TextView = view.findViewById(R.id.eventTitle) as TextView
         val itemBackGround: ImageView = view.findViewById(R.id.itemBackground) as ImageView
-        val backGroundLayout: FrameLayout = view.findViewById(R.id.backgroundLayout) as FrameLayout
+        val backGroundLayout: ConstraintLayout = view.findViewById(R.id.backgroundLayout) as ConstraintLayout
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -29,7 +30,7 @@ class RecyclerAdapter(private val context: Context, private val eventList: Array
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.textTitle.text =  eventList[position].title
-        Glide.with(context).load(eventList[position].image).into(holder.itemBackGround)
+        Glide.with(context).load(eventList[position].image).error(R.drawable.ic_error).into(holder.itemBackGround)
         holder.backGroundLayout.setOnClickListener{
             val intent = Intent(context, EventDetailsActivity::class.java)
             intent.putExtra(EventDetailsActivity.EVENT_ITEM_ID, eventList[position].id)

@@ -8,4 +8,6 @@
     <string name="do_checkin">Fazer Checkin</string>
     <string name="checkin_fail">Falha no Checkin</string>
     <string name="checkin_successful">Sucesso no checkin!</string>
+    <string name="event_image_description">Imagem do Evento</string>
+    <string name="details">Detalhes</string>
 </resources>
